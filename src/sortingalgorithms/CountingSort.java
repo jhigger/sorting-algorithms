@@ -2,7 +2,7 @@ package sortingalgorithms;
 
 public class CountingSort {
 
-    static int counter = 0;
+    private static int counter = 0;
 
     private CountingSort() {
     }
@@ -19,9 +19,9 @@ public class CountingSort {
         int max = arr[0];
 
         counter++;
-        int condition = arr.length + 1;
-        counter += condition;
-        counter += condition - 1;
+//        int condition = arr.length + 1;
+//        counter += condition;
+//        counter += condition - 1;
         for (int num : arr) {
             counter++;
             if (num > max) {
@@ -36,9 +36,9 @@ public class CountingSort {
         int[] count = new int[max + 1];
 
         counter++;
-        int condition2 = count.length + 1;
-        counter += condition2;
-        counter += condition2 - 1;
+//        int condition2 = count.length + 1;
+//        counter += condition2;
+//        counter += condition2 - 1;
         for (int num : arr) {
             counter++;
             count[num]++;
@@ -82,5 +82,9 @@ public class CountingSort {
             arr[i] = output[i];
         }
         counter++;
+    }
+
+    public static int getCounter() {
+        return counter;
     }
 }
