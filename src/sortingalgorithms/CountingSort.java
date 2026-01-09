@@ -8,7 +8,6 @@ public class CountingSort {
     }
 
     public static void useCountingSort(int[] arr) {
-        counter++;
         if (arr.length == 0) {
             counter++;
             return;
@@ -19,11 +18,10 @@ public class CountingSort {
         int max = arr[0];
 
         counter++;
-//        int condition = arr.length + 1;
-//        counter += condition;
-//        counter += condition - 1;
         for (int num : arr) {
             counter++;
+            counter++;
+
             if (num > max) {
                 counter++;
                 max = num;
@@ -36,10 +34,10 @@ public class CountingSort {
         int[] count = new int[max + 1];
 
         counter++;
-//        int condition2 = count.length + 1;
-//        counter += condition2;
-//        counter += condition2 - 1;
         for (int num : arr) {
+            counter++;
+            counter++;
+
             counter++;
             count[num]++;
         }
@@ -47,10 +45,10 @@ public class CountingSort {
 
         // Cumulative sum
         counter++;
-        int condition3 = max - 1 + 2;
-        counter += condition3;
-        counter += condition3 - 1;
         for (int i = 1; i <= max; i++) {
+            counter++;
+            counter++;
+
             counter++;
             count[i] += count[i - 1];
         }
@@ -61,10 +59,10 @@ public class CountingSort {
         int[] output = new int[arr.length];
 
         counter++;
-        int condition4 = max - 1 + 2;
-        counter += condition4;
-        counter += condition4 - 1;
         for (int i = arr.length - 1; i >= 0; i--) {
+            counter++;
+            counter++;
+
             counter++;
             output[count[arr[i]] - 1] = arr[i];
             counter++;
@@ -74,10 +72,10 @@ public class CountingSort {
 
         // Copy back to original
         counter++;
-        int condition5 = max - 1 + 2;
-        counter += condition5;
-        counter += condition5 - 1;
         for (int i = 0; i < arr.length; i++) {
+            counter++;
+            counter++;
+
             counter++;
             arr[i] = output[i];
         }

@@ -8,8 +8,6 @@ public class ModifiedCountingSort {
     }
 
     public static void useCountingSort(int[] arr) {
-        counter++;
-
         if (arr.length == 0) {
             counter++;
             return;
@@ -22,16 +20,14 @@ public class ModifiedCountingSort {
         int max = arr[0];
 
         counter++;
-//        int condition = arr.length + 1;
-//        counter += condition;
-//        counter += condition - 1;
         for (int num : arr) {
             counter++;
+            counter++;
+            
             if (num < min) {
                 counter++;
                 min = num;
             }
-            counter++;
             if (num > max) {
                 counter++;
                 max = num;
@@ -47,10 +43,10 @@ public class ModifiedCountingSort {
 
         // ===== Fill count array =====
         counter++;
-//        int condition2 = arr.length + 1;
-//        counter += condition2;
-//        counter += condition2 - 1;
         for (int num : arr) {
+            counter++;
+            counter++;
+
             counter++;
             count[num - min]++;
         }
@@ -62,11 +58,10 @@ public class ModifiedCountingSort {
         int index = 0;
 
         counter++;
-        int condition3 = range + 1;
-        counter += condition3;
-        counter += condition3 - 1;
         for (int i = 0; i < range; i++) {
             counter++;
+            counter++;
+
             while (count[i] > 0) {
                 counter++;
                 arr[index++] = i + min;

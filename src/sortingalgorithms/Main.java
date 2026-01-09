@@ -51,17 +51,32 @@ class Main {
         System.out.println("Modified Counting Sort Duration: " + modifiedCountingSortDuration + "ms");
         System.out.println("Modified Counting Sort Frequency Count: " + ModifiedCountingSort.getCounter());
 
+        System.out.println("=========================================================================================");
+
+        int[] clone5 = unsortedArray.clone();
+        long heapSortStart = System.nanoTime();
+        HeapSort.useHeapSort(clone5);
+        double heapSortDuration = (double) (System.nanoTime() - heapSortStart) / 1000000;
+        System.out.println("Heap Sort Duration: " + heapSortDuration + "ms");
+        System.out.println("Heap Sort Frequency Count: " + HeapSort.getCounter());
+
+        System.out.println("=========================================================================================");
+
+        int[] clone6 = unsortedArray.clone();
+        long timSortStart = System.nanoTime();
+        TimSort.useMinimalTimSort(clone6);
+        double timSortDuration = (double) (System.nanoTime() - timSortStart) / 1000000;
+        System.out.println("Tim Sort Duration: " + timSortDuration + "ms");
+        System.out.println("Tim Sort Frequency Count: " + TimSort.getCounter());
+
         // =============================
     }
 
     static void useQuickSort(int[] arr, int low, int high) {
-        quickSortCounter++;
         if (low < high) {
             quickSortCounter++;
             int pivotIndex = partition(arr, low, high);
-            quickSortCounter++;
             useQuickSort(arr, low, pivotIndex - 1);
-            quickSortCounter++;
             useQuickSort(arr, pivotIndex + 1, high);
         }
     }
@@ -73,10 +88,8 @@ class Main {
         int i = low - 1;
 
         quickSortCounter++;
-        int condition = high - low + 1;
-        quickSortCounter += condition;
-        quickSortCounter += condition - 1;
         for (int j = low; j < high; j++) {
+            quickSortCounter++;
             quickSortCounter++;
             if (arr[j] <= pivot) {
                 quickSortCounter++;
@@ -107,23 +120,24 @@ class Main {
         int n = arr.length;
 
         insertionSortCounter++;
-        int condition = n - 1 + 1;
-        insertionSortCounter += condition;
-        insertionSortCounter += condition - 1;
         for (int i = 1; i < n; i++) {
+            insertionSortCounter++;
+            insertionSortCounter++;
+
             insertionSortCounter++;
             int key = arr[i];
             insertionSortCounter++;
             int j = i - 1;
 
-            insertionSortCounter++;
             while (j >= 0 && arr[j] > key) {
+                insertionSortCounter++;
+
                 insertionSortCounter++;
                 arr[j + 1] = arr[j];
                 insertionSortCounter++;
                 j--;
             }
-            insertionSortCounter++;
+
             insertionSortCounter++;
             arr[j + 1] = key;
         }
