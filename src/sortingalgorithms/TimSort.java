@@ -117,6 +117,7 @@ public class TimSort {
                 counter++;
                 end++;
             }
+            
             reverse(arr, start, end - 1);
         } else {
             // ascending
@@ -127,6 +128,8 @@ public class TimSort {
                 end++;
             }
         }
+
+        counter++;
         return end;
     }
 
@@ -213,12 +216,17 @@ public class TimSort {
                     runs.removeLast();
                     counter++;
                     runs.set(runs.size() - 1, new int[]{l1, r2});
-                } else break;
+                } else {
+                    counter++;
+                    break;
+                }
             }
         }
 
         // Merge remaining runs
         while (runs.size() > 1) {
+            counter++;
+
             counter++;
             int[] run1 = runs.get(runs.size() - 2);
             counter++;
@@ -230,7 +238,7 @@ public class TimSort {
             int r1 = run1[1];
             counter++;
             int r2 = run2[1];
-            
+
             merge(arr, l1, r1 - 1, r2 - 1);
 
             counter++;
