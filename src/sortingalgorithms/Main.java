@@ -99,6 +99,25 @@ class Main {
         System.out.println("Three Way Quick Sort Duration: " + threeWayQuickSortDuration + "ms");
         System.out.println("Three Way Quick Sort Frequency Count: " + twqs.getCounter());
 
+        System.out.println("=========================================================================================");
+
+        int[] clone10 = unsortedArray.clone();
+        long jesseSortStart = System.nanoTime();
+        JesseSort.useJesseSort(clone10);
+        double jesseSortDuration = (double) (System.nanoTime() - jesseSortStart) / 1000000;
+        System.out.println("Jesse Sort Duration: " + jesseSortDuration + "ms");
+        System.out.println("Jesse Sort Frequency Count: " + JesseSort.getCounter());
+
+        System.out.println("=========================================================================================");
+
+        int[] clone11 = unsortedArray.clone();
+        long binaryInsertionSortStart = System.nanoTime();
+        BinaryInsertionSort.useBinaryInsertionSort(clone11);
+        double binaryInsertionSortDuration = (double) (System.nanoTime() - binaryInsertionSortStart) / 1000000;
+        System.out.println("B Insertion Sort Duration: " + binaryInsertionSortDuration + "ms");
+        System.out.println("B Insertion Sort Frequency Count: " + BinaryInsertionSort.getCounter());
+        System.out.println("Sorted Array: " + Arrays.toString(clone11));
+
         // =============================
     }
 
