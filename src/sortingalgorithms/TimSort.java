@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TimSort {
 
-    static final int MIN_RUN = 32;
+    static final int MIN_RUN = 8;
     private static int counter = 0;
 
     private TimSort() {
@@ -102,8 +102,11 @@ public class TimSort {
     static int findRun(int[] arr, int start, int n) {
         counter++;
         int end = start + 1;
-        counter++;
-        if (end == n) return end;
+
+        if (end == n) {
+            counter++;
+            return end;
+        }
 
         // Determine direction
         if (arr[end] < arr[start]) {
@@ -169,11 +172,16 @@ public class TimSort {
             if (runLen < minRun) {
                 counter++;
                 int end = Math.min(i + minRun, n);
+
                 insertionSort(arr, i, end - 1);
+
                 counter++;
                 runEnd = end;
             }
+
+            counter++;
             runs.add(new int[]{i, runEnd});
+            counter++;
             i = runEnd;
 
             // Maintain merge balance
@@ -200,6 +208,7 @@ public class TimSort {
 
                 if (len1 <= len2) {
                     merge(arr, l1, r1 - 1, r2 - 1);
+
                     counter++;
                     runs.removeLast();
                     counter++;
@@ -221,7 +230,9 @@ public class TimSort {
             int r1 = run1[1];
             counter++;
             int r2 = run2[1];
+            
             merge(arr, l1, r1 - 1, r2 - 1);
+
             counter++;
             runs.removeLast();
             counter++;
