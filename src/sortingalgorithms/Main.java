@@ -69,6 +69,37 @@ class Main {
         System.out.println("Tim Sort Duration: " + timSortDuration + "ms");
         System.out.println("Tim Sort Frequency Count: " + TimSort.getCounter());
 
+        System.out.println("=========================================================================================");
+
+        int[] clone7 = unsortedArray.clone();
+        long bubbleSortStart = System.nanoTime();
+        BubbleSort.useBubbleSort(clone7);
+        double bubbleSortDuration = (double) (System.nanoTime() - bubbleSortStart) / 1000000;
+        System.out.println("Bubble Sort Duration: " + bubbleSortDuration + "ms");
+        System.out.println("Bubble Sort Frequency Count: " + BubbleSort.getCounter());
+
+        System.out.println("=========================================================================================");
+
+        int[] clone8 = unsortedArray.clone();
+        long selectionSortStart = System.nanoTime();
+        SelectionSort.useSelectionSort(clone8);
+        double selectionSortDuration = (double) (System.nanoTime() - selectionSortStart) / 1000000;
+        System.out.println("Selection Sort Duration: " + selectionSortDuration + "ms");
+        System.out.println("Selection Sort Frequency Count: " + SelectionSort.getCounter());
+
+        System.out.println("=========================================================================================");
+
+        int[] clone9 = unsortedArray.clone();
+        Integer[] converted = Arrays.stream(clone9)
+                .boxed()
+                .toArray(Integer[]::new);
+        long threeWayQuickSortStart = System.nanoTime();
+        ThreeWayQuickSort<Integer> twqs = new ThreeWayQuickSort<>();
+        twqs.sort(converted, 0, clone9.length - 1);
+        double threeWayQuickSortDuration = (double) (System.nanoTime() - threeWayQuickSortStart) / 1000000;
+        System.out.println("Three Way Quick Sort Duration: " + threeWayQuickSortDuration + "ms");
+        System.out.println("Three Way Quick Sort Frequency Count: " + twqs.getCounter());
+
         // =============================
     }
 
