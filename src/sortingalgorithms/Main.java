@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 class Main {
     private static int insertionSortCounter = 0;
-    private static int quickSortCounter = 0;
 
     public static void main(String[] args) {
         System.out.println("Hello, World!");
@@ -28,10 +27,10 @@ class Main {
 
         int[] clone2 = unsortedArray.clone();
         long quickSortStart = System.nanoTime();
-        useQuickSort(clone2, 0, clone2.length - 1);
+        QuickSort.useQuickSort(clone2);
         double quickSortDuration = (double) (System.nanoTime() - quickSortStart) / 1000000;
         System.out.println("Quick Sort Duration: " + quickSortDuration + "ms");
-        System.out.println("Quick Sort Frequency Count: " + quickSortCounter);
+        System.out.println("Quick Sort Frequency Count: " + QuickSort.getCounter());
 
         System.out.println("=========================================================================================");
 
@@ -101,49 +100,6 @@ class Main {
         System.out.println("Three Way Quick Sort Frequency Count: " + twqs.getCounter());
 
         // =============================
-    }
-
-    static void useQuickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            quickSortCounter++;
-            int pivotIndex = partition(arr, low, high);
-            useQuickSort(arr, low, pivotIndex - 1);
-            useQuickSort(arr, pivotIndex + 1, high);
-        }
-    }
-
-    static int partition(int[] arr, int low, int high) {
-        quickSortCounter++;
-        int pivot = arr[high];
-        quickSortCounter++;
-        int i = low - 1;
-
-        quickSortCounter++;
-        for (int j = low; j < high; j++) {
-            quickSortCounter++;
-            quickSortCounter++;
-            if (arr[j] <= pivot) {
-                quickSortCounter++;
-                i++;
-                quickSortCounter++;
-                int temp = arr[i];
-                quickSortCounter++;
-                arr[i] = arr[j];
-                quickSortCounter++;
-                arr[j] = temp;
-            }
-        }
-        quickSortCounter++;
-
-        quickSortCounter++;
-        int temp = arr[i + 1];
-        quickSortCounter++;
-        arr[i + 1] = arr[high];
-        quickSortCounter++;
-        arr[high] = temp;
-
-        quickSortCounter++;
-        return i + 1;
     }
 
     public static void useInsertionSort(int[] arr) {
