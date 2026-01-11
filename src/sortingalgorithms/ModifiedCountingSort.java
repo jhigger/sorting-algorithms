@@ -23,7 +23,7 @@ public class ModifiedCountingSort {
         for (int num : arr) {
             counter++;
             counter++;
-            
+
             if (num < min) {
                 counter++;
                 min = num;
@@ -63,6 +63,8 @@ public class ModifiedCountingSort {
             counter++;
 
             while (count[i] > 0) {
+                counter++;
+
                 counter++;
                 arr[index++] = i + min;
                 counter++;
