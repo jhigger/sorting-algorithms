@@ -117,7 +117,7 @@ public class TimSort {
                 counter++;
                 end++;
             }
-            
+
             reverse(arr, start, end - 1);
         } else {
             // ascending
@@ -152,7 +152,7 @@ public class TimSort {
     }
 
     // Timsort main function
-    public static void useMinimalTimSort(int[] arr) {
+    public static void useTimSort(int[] arr) {
         counter++;
         int n = arr.length;
         counter++;

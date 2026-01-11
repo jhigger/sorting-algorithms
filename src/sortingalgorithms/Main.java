@@ -64,7 +64,7 @@ class Main {
 
         int[] clone6 = unsortedArray.clone();
         long timSortStart = System.nanoTime();
-        TimSort.useMinimalTimSort(clone6);
+        TimSort.useTimSort(clone6);
         double timSortDuration = (double) (System.nanoTime() - timSortStart) / 1000000;
         System.out.println("Tim Sort Duration: " + timSortDuration + "ms");
         System.out.println("Tim Sort Frequency Count: " + TimSort.getCounter());
