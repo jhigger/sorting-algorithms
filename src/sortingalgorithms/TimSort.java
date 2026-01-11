@@ -1,37 +1,51 @@
 package sortingalgorithms;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class TimSort {
-
-    static final int MIN_RUN = 8;
     private static int counter = 0;
 
     private TimSort() {
     }
 
-    // Calculate minimum run length (kept small here for demo)
-    static int calcMinRun(int n) {
+    public static void useTimSort(int[] arr) {
         counter++;
-        int r = 0;
+        int n = arr.length;
+        counter++;
+        int runSize = 10;
 
-        while (n >= MIN_RUN) {
+        counter++;
+        for (int i = 0; i < n; i += runSize) {
+            counter++;
             counter++;
 
-            counter++;
-            r |= (n & 1);
-            counter++;
-            n >>= 1;
+            insertionSort(arr, i, Math.min(i + runSize - 1, n - 1));
         }
+        counter++;
 
         counter++;
-        return n + r;
+        for (int size = runSize; size < n; size *= 2) {
+            counter++;
+            counter++;
+
+            counter++;
+            for (int left = 0; left < n; left += 2 * size) {
+                counter++;
+                counter++;
+
+                counter++;
+                int mid = left + size - 1;
+                counter++;
+                int right = Math.min(left + 2 * size - 1, n - 1);
+
+                if (mid < right) {
+                    merge(arr, left, mid, right);
+                }
+            }
+            counter++;
+        }
+        counter++;
     }
 
-    // Insertion sort for small ranges
-    public static void insertionSort(int[] arr, int left, int right) {
+    private static void insertionSort(int[] arr, int left, int right) {
         counter++;
         for (int i = left + 1; i <= right; i++) {
             counter++;
@@ -39,213 +53,78 @@ public class TimSort {
 
             counter++;
             int key = arr[i];
-            counter++;
-            int j = i - 1;
 
-            while (j >= left && arr[j] > key) {
+            if (key >= arr[i - 1]) {
                 counter++;
-
-                counter++;
-                arr[j + 1] = arr[j];
-                counter++;
-                j--;
+                continue;
             }
 
             counter++;
-            arr[j + 1] = key;
-        }
-        counter++;
-    }
-
-    // Merge two sorted subarrays [l..m] and [m+1..r]
-    public static void merge(int[] arr, int l, int m, int r) {
-        counter++;
-        int[] left = Arrays.copyOfRange(arr, l, m + 1);
-        counter++;
-        int[] right = Arrays.copyOfRange(arr, m + 1, r + 1);
-
-        counter++;
-        int i = 0;
-        counter++;
-        int j = 0;
-        counter++;
-        int k = l;
-
-        while (i < left.length && j < right.length) {
+            int low = left;
             counter++;
+            int high = i - 1;
 
-            if (left[i] <= right[j]) {
-                counter++;
-                arr[k++] = left[i++];
-            } else {
-                counter++;
-                arr[k++] = right[j++];
-            }
-        }
-
-        while (i < left.length) {
-            counter++;
-
-            counter++;
-            arr[k++] = left[i++];
-        }
-
-        while (j < right.length) {
-            counter++;
-
-            counter++;
-            arr[k++] = right[j++];
-        }
-    }
-
-    // Detect ascending/descending run starting at index "start"
-    static int findRun(int[] arr, int start, int n) {
-        counter++;
-        int end = start + 1;
-
-        if (end == n) {
-            counter++;
-            return end;
-        }
-
-        // Determine direction
-        if (arr[end] < arr[start]) {
-            // descending
-            while (end < n && arr[end] < arr[end - 1]) {
+            while (low <= high) {
                 counter++;
 
                 counter++;
-                end++;
-            }
+                int mid = (low + high) >>> 1;
 
-            reverse(arr, start, end - 1);
-        } else {
-            // ascending
-            while (end < n && arr[end] >= arr[end - 1]) {
-                counter++;
-
-                counter++;
-                end++;
-            }
-        }
-
-        counter++;
-        return end;
-    }
-
-    // Reverse subarray from l to r
-    public static void reverse(int[] arr, int l, int r) {
-        while (l < r) {
-            counter++;
-
-            counter++;
-            int temp = arr[l];
-            counter++;
-            arr[l] = arr[r];
-            counter++;
-            arr[r] = temp;
-            counter++;
-            l++;
-            counter++;
-            r--;
-        }
-    }
-
-    // Timsort main function
-    public static void useTimSort(int[] arr) {
-        counter++;
-        int n = arr.length;
-        counter++;
-        int minRun = calcMinRun(n);
-        counter++;
-        List<int[]> runs = new ArrayList<>();
-
-        counter++;
-        int i = 0;
-
-        while (i < n) {
-            counter++;
-
-            counter++;
-            int runEnd = findRun(arr, i, n);
-            counter++;
-            int runLen = runEnd - i;
-
-            // Extend short runs to minRun using insertion sort
-            if (runLen < minRun) {
-                counter++;
-                int end = Math.min(i + minRun, n);
-
-                insertionSort(arr, i, end - 1);
-
-                counter++;
-                runEnd = end;
-            }
-
-            counter++;
-            runs.add(new int[]{i, runEnd});
-            counter++;
-            i = runEnd;
-
-            // Maintain merge balance
-            while (runs.size() > 1) {
-                counter++;
-
-                counter++;
-                int[] run1 = runs.get(runs.size() - 2);
-                counter++;
-                int[] run2 = runs.getLast();
-
-                counter++;
-                int l1 = run1[0];
-                counter++;
-                int r1 = run1[1];
-                counter++;
-                int l2 = run2[0];
-                counter++;
-                int r2 = run2[1];
-                counter++;
-                int len1 = r1 - l1;
-                counter++;
-                int len2 = r2 - l2;
-
-                if (len1 <= len2) {
-                    merge(arr, l1, r1 - 1, r2 - 1);
-
+                if (key < arr[mid]) {
                     counter++;
-                    runs.removeLast();
-                    counter++;
-                    runs.set(runs.size() - 1, new int[]{l1, r2});
+                    high = mid - 1;
                 } else {
                     counter++;
-                    break;
+                    low = mid + 1;
                 }
+            }
+
+            counter++;
+            int nToMove = i - low;
+
+            if (nToMove > 0) {
+                counter++;
+                System.arraycopy(arr, low, arr, low + 1, nToMove);
+            }
+
+            counter++;
+            arr[low] = key;
+        }
+        counter++;
+    }
+
+    private static void merge(int[] arr, int l, int m, int r) {
+        counter++;
+        if (arr[m] <= arr[m + 1]) return;
+        counter++;
+        int[] temp = new int[r - l + 1];
+        counter++;
+        int i = l, j = m + 1, k = 0;
+
+        while (i <= m && j <= r) {
+            counter++;
+
+            if (arr[i] <= arr[j]) {
+                counter++;
+                temp[k++] = arr[i++];
+            } else {
+                counter++;
+                temp[k++] = arr[j++];
             }
         }
 
-        // Merge remaining runs
-        while (runs.size() > 1) {
+        if (i <= m) {
             counter++;
-
-            counter++;
-            int[] run1 = runs.get(runs.size() - 2);
-            counter++;
-            int[] run2 = runs.getLast();
-
-            counter++;
-            int l1 = run1[0];
-            counter++;
-            int r1 = run1[1];
-            counter++;
-            int r2 = run2[1];
-
-            merge(arr, l1, r1 - 1, r2 - 1);
-
-            counter++;
-            runs.removeLast();
-            counter++;
-            runs.set(runs.size() - 1, new int[]{l1, r2});
+            System.arraycopy(arr, i, temp, k, m - i + 1);
         }
+
+        if (j <= r) {
+            counter++;
+            System.arraycopy(arr, j, temp, k, r - j + 1);
+        }
+
+        counter++;
+        System.arraycopy(temp, 0, arr, l, temp.length);
     }
 
     public static int getCounter() {
