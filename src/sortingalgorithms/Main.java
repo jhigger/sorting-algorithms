@@ -152,7 +152,16 @@ class Main {
         double flagSortDuration = (double) (System.nanoTime() - flagSortStart) / 1000000;
         System.out.println("American Flag Sort Duration: " + flagSortDuration + "ms");
         System.out.println("American Flag Sort Frequency Count: " + AmericanFlagSort.getCounter());
-        System.out.println("Sorted Array: " + Arrays.toString(clone15));
+
+        System.out.println("=========================================================================================");
+
+        int[] clone16 = unsortedArray.clone();
+        long addressStart = System.nanoTime();
+        AddressCalculationSort.useAddressCalculationSort(clone16);
+        double addressDuration = (double) (System.nanoTime() - addressStart) / 1000000;
+        System.out.println("Address Calculation Sort Duration: " + addressDuration + "ms");
+        System.out.println("Address Calculation Sort Frequency Count: " + AddressCalculationSort.getCounter());
+        System.out.println("Sorted Array: " + Arrays.toString(clone16));
 
         // =============================
     }
