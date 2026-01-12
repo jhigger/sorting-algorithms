@@ -125,7 +125,34 @@ class Main {
         double waveInsertionSortDuration = (double) (System.nanoTime() - waveInsertionSortStart) / 1000000;
         System.out.println("Wave Insertion Sort Duration: " + waveInsertionSortDuration + "ms");
         System.out.println("Wave Insertion Sort Frequency Count: " + WaveInsertionSort.getCounter());
-        System.out.println("Sorted Array: " + Arrays.toString(clone12));
+
+        System.out.println("=========================================================================================");
+
+        int[] clone13 = unsortedArray.clone();
+        long flashSortStart = System.nanoTime();
+        FlashSort.useFlashSort(clone13);
+        double flashSortDuration = (double) (System.nanoTime() - flashSortStart) / 1000000;
+        System.out.println("Flash Insertion Sort Duration: " + flashSortDuration + "ms");
+        System.out.println("Flash Insertion Sort Frequency Count: " + FlashSort.getCounter());
+
+        System.out.println("=========================================================================================");
+
+        int[] clone14 = unsortedArray.clone();
+        long proxmapSortStart = System.nanoTime();
+        ProxmapSort.useProxmapSort(clone14);
+        double proxmapSortDuration = (double) (System.nanoTime() - proxmapSortStart) / 1000000;
+        System.out.println("Proxmap Sort Duration: " + proxmapSortDuration + "ms");
+        System.out.println("Proxmap Sort Frequency Count: " + ProxmapSort.getCounter());
+
+        System.out.println("=========================================================================================");
+
+        int[] clone15 = unsortedArray.clone();
+        long flagSortStart = System.nanoTime();
+        AmericanFlagSort.useAmericanFlagSort(clone15);
+        double flagSortDuration = (double) (System.nanoTime() - flagSortStart) / 1000000;
+        System.out.println("American Flag Sort Duration: " + flagSortDuration + "ms");
+        System.out.println("American Flag Sort Frequency Count: " + AmericanFlagSort.getCounter());
+        System.out.println("Sorted Array: " + Arrays.toString(clone15));
 
         // =============================
     }
