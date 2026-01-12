@@ -116,7 +116,16 @@ class Main {
         double binaryInsertionSortDuration = (double) (System.nanoTime() - binaryInsertionSortStart) / 1000000;
         System.out.println("B Insertion Sort Duration: " + binaryInsertionSortDuration + "ms");
         System.out.println("B Insertion Sort Frequency Count: " + BinaryInsertionSort.getCounter());
-        System.out.println("Sorted Array: " + Arrays.toString(clone11));
+
+        System.out.println("=========================================================================================");
+
+        int[] clone12 = unsortedArray.clone();
+        long waveInsertionSortStart = System.nanoTime();
+        WaveInsertionSort.useWaveInsertionSort(clone12);
+        double waveInsertionSortDuration = (double) (System.nanoTime() - waveInsertionSortStart) / 1000000;
+        System.out.println("Wave Insertion Sort Duration: " + waveInsertionSortDuration + "ms");
+        System.out.println("Wave Insertion Sort Frequency Count: " + WaveInsertionSort.getCounter());
+        System.out.println("Sorted Array: " + Arrays.toString(clone12));
 
         // =============================
     }
