@@ -143,6 +143,7 @@ class Main {
         double proxmapSortDuration = (double) (System.nanoTime() - proxmapSortStart) / 1000000;
         System.out.println("Proxmap Sort Duration: " + proxmapSortDuration + "ms");
         System.out.println("Proxmap Sort Frequency Count: " + ProxmapSort.getCounter());
+        System.out.println("Sorted Array: " + Arrays.toString(clone14));
 
         System.out.println("=========================================================================================");
 
@@ -161,7 +162,6 @@ class Main {
         double addressDuration = (double) (System.nanoTime() - addressStart) / 1000000;
         System.out.println("Address Calculation Sort Duration: " + addressDuration + "ms");
         System.out.println("Address Calculation Sort Frequency Count: " + AddressCalculationSort.getCounter());
-        System.out.println("Sorted Array: " + Arrays.toString(clone16));
 
         // =============================
     }
