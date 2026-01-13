@@ -8,32 +8,26 @@ public class ProxmapSort {
     }
 
     public static void useProxmapSort(int[] arr) {
-        counter++;
-        int n = arr.length;
-
-        if (n <= 1) {
+        if (arr.length <= 1) {
             counter++;
             return;
         }
 
         counter++;
         int[] minMax = findMinAndMax(arr);
-        counter++;
-        int min = minMax[0], max = minMax[1];
 
-        if (min == max) {
+        if (minMax[0] == minMax[1]) {
             counter++;
             return;
         }
 
         counter++;
-        int[] mapKey = new int[n],
-                hitCount = mapValuesAndCountHits(arr, mapKey, min, max),
-                prefixMap = buildPrefixMap(hitCount),
+        int[] mapKey = new int[arr.length],
+                prefixMap = buildPrefixMap(mapValuesAndCountHits(arr, mapKey, minMax[0], minMax[1])),
                 result = positionGuidedInsert(arr, mapKey, prefixMap);
 
         counter++;
-        System.arraycopy(result, 0, arr, 0, n);
+        System.arraycopy(result, 0, arr, 0, arr.length);
     }
 
     private static int[] findMinAndMax(int[] arr) {
@@ -94,24 +88,17 @@ public class ProxmapSort {
 
     private static int[] mapValuesAndCountHits(int[] arr, int[] mapKey, int min, int max) {
         counter++;
-        int n = arr.length;
+        int[] hitCount = new int[arr.length];
         counter++;
-        int[] hitCount = new int[n];
+        double scale = (double) (arr.length - 1) / (max - min);
 
         counter++;
-        double scale = (double) (n - 1) / (max - min);
-
-        counter++;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < arr.length; i++) {
             counter++;
             counter++;
 
             counter++;
-            int key = (int) (scale * (arr[i] - min));
-            counter++;
-            mapKey[i] = key;
-            counter++;
-            hitCount[key]++;
+            hitCount[mapKey[i] = (int) (scale * (arr[i] - min))]++;
         }
         counter++;
 
@@ -121,21 +108,14 @@ public class ProxmapSort {
 
     private static int[] buildPrefixMap(int[] hitCount) {
         counter++;
-        int n = hitCount.length, runningTotal = 0;
-        counter++;
-        int[] prefixMap = new int[n];
+        int n = hitCount.length, runningTotal = 0, prefixMap[] = new int[n];
 
-        counter++;
         for (int i = 0; i < n; i++) {
-            counter++;
-            counter++;
-
             counter++;
             prefixMap[i] = runningTotal;
             counter++;
             runningTotal += hitCount[i];
         }
-        counter++;
 
         counter++;
         return prefixMap;
@@ -143,28 +123,22 @@ public class ProxmapSort {
 
     private static int[] positionGuidedInsert(int[] arr, int[] mapKey, int[] prefixMap) {
         counter++;
-        int n = arr.length;
+        int[] result = new int[arr.length];
+        counter++;
+        boolean[] occupied = new boolean[arr.length];
 
         counter++;
-        int[] result = new int[n];
-        counter++;
-        boolean[] occupied = new boolean[n];
-
-        counter++;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < arr.length; i++) {
             counter++;
             counter++;
 
-            counter++;
-            int dest = prefixMap[mapKey[i]];
-
-            while (occupied[dest] && result[dest] < arr[i]) {
+            while (occupied[prefixMap[mapKey[i]]] && result[prefixMap[mapKey[i]]] < arr[i]) {
                 counter++;
                 counter++;
-                dest++;
+                prefixMap[mapKey[i]]++;
             }
 
-            insertWithRightShift(result, occupied, dest, arr[i]);
+            insertWithRightShift(result, occupied, prefixMap[mapKey[i]], arr[i]);
         }
         counter++;
 
@@ -178,7 +152,6 @@ public class ProxmapSort {
             result[dest] = value;
             counter++;
             occupied[dest] = true;
-            counter++;
             return;
         }
 
